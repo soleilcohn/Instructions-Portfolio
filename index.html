@@ -276,7 +276,7 @@
     .memo-simple { font-size: 1.02rem; line-height: 2; color: var(--mid); margin-bottom: 36px; }
     .memo-simple strong { color: var(--plum); }
     .memo-h { font-family: 'Playfair Display', serif; font-size: 1.4rem; color: var(--plum); font-weight: 600; margin-bottom: 14px; padding-bottom: 8px; border-bottom: 2px solid var(--accent-lt); }
-    .memo-body { font-size: 1.02rem; line-height: 2; color: var(--mid); }
+    .memo-body { font-size: 1.02rem; line-height: 2; color: var(--mid); margin-bottom: 28px; }
 
     /* ── TESTER CARDS ── */
     .tester-card { display: grid; grid-template-columns: 320px 1fr; gap: 32px; align-items: start; padding: 28px; background: var(--surface); border: 1px solid var(--border); margin-bottom: 24px; transition: transform .2s, box-shadow .2s; }
@@ -369,7 +369,6 @@
 <!-- ── HEADER ── -->
 <header class="site-header">
   <div class="header-brand">
-    <!-- To use your logo: replace the span with <img class="brand-logo" src="YOUR_LOGO_URL" alt="G3"> -->
     <span class="brand-name">G3</span>
     <span class="brand-tag">Makeup Instructions</span>
   </div>
@@ -449,17 +448,14 @@
           <div class="look-mod"><div class="look-mod-n">I</div><div class="look-mod-b"><strong>Skin Base</strong><span>Steps 1–3 · Skin tint, brows, concealer</span></div></div>
           <div class="look-mod"><div class="look-mod-n">II</div><div class="look-mod-b"><strong>Contour &amp; Color</strong><span>Steps 4–7 · Bronzer, blush, powder, highlight</span></div></div>
           <div class="look-mod"><div class="look-mod-n">III</div><div class="look-mod-b"><strong>Eyes &amp; Lips</strong><span>Steps 8–10 · Eyeliner, lipliner, mascara</span></div></div>
-
-          <!-- HOME PRODUCT PHOTO — paste your image URL into src="" below -->
           <div class="home-img-box">
-            <img src="img/22.png" alt="Product photo"
-              onerror="this.style.display='none'"/>
+            <img src="img/22.png" alt="Product photo" onerror="this.style.display='none'"/>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- TEAM BIOS — alphabetical by last name: Argaez, Britt, Cohn, Noard, Smith -->
+    <!-- TEAM BIOS -->
     <div id="team" class="page-section">
       <div class="section-banner">
         <h2>Meet the Team</h2>
@@ -654,12 +650,10 @@
 
         </div><!-- /steps-scroll-col -->
 
-        <!-- STICKY REFERENCE IMAGE — paste your image URL into src="" below -->
         <div class="steps-sticky-col">
           <span class="sticky-img-lbl">Reference Image</span>
           <div class="sticky-img-box">
-            <img src="img/Instructions drawing.png" alt="Reference image"
-              onerror="this.style.display='none'"/>
+            <img src="img/Instructions drawing.png" alt="Reference image" onerror="this.style.display='none'"/>
           </div>
         </div>
 
@@ -670,19 +664,23 @@
     <div id="memo" class="page-section">
       <div class="section-banner">
         <h2>Design Memo</h2>
+        <p class="ban-sub">Memoranda of Understanding</p>
       </div>
 
       <div class="memo-wrap">
-        <p class="memo-simple">
-          <strong>To:</strong> Professor Weiner &amp; WRT 307 Class<br>
-          <strong>From:</strong> Emma Argaez, Amirah Britt, Ella Cohn, Kriston Noard, Jamyka Smith<br>
-          <strong>Date:</strong> March 24, 2026<br>
-          <strong>Subject:</strong> Design Memo - Makeup Instructions Project
-        </p>
 
-        <h4 class="memo-h"></h4>
-        <p class="memo-body">For this project, we decided to create a step-by-step guide for applying an everyday makeup look. We wanted something that felt approachable and easy to follow, no matter how much experience someone has with makeup. The routine covers ten steps, starting with skin tint as the base and working through concealer, bronzer, blush, setting powder, highlighter, eyebrow gel, brown eyeliner, lipliner, and mascara. The steps follow the natural order in which makeup is typically applied, building from base to finish. As a group, we agreed early on that including a facial diagram would make the instructions much easier to understand. Rather than relying only on written descriptions, we felt the visual would help users see exactly where each product goes on the face, making the written steps easier to follow along the way. Our usability testing backed up our approach. All three testers were able to follow the routine successfully and said they felt confident enough to do it again on their own.
-        </p>
+        <h4 class="memo-h">Stakeholders</h4>
+        <p class="memo-body">This Memoranda of Understanding (hereinafter referred to as the "MoU") is established and uploaded onto the HTML website day of March 24, 2026 ("Effective Date"), by and between Ella, Emma, Kriston, Amirah, and Jamyka (hereinafter referred to as "G3") and WRT 307 classmates and Professor Lyndsey W. (hereinafter referred to as "WRT 307 Cohort").</p>
+
+        <h4 class="memo-h">Purpose</h4>
+        <p class="memo-body">The purpose of this Memoranda of Understanding (MoU) is to codify instructions as it pertains to makeup application between G3 and interested audience members within WRT 307 Cohort with the understanding that this exchange of knowledge is attainable as well as versatile concerning price point and shades of pigmentation. By declaring this agreement, both stakeholders seek to share feedback with one another through the promise of adaptable, expressive application. This MoU does not create a legally binding contract but serves as a declaration concerning continued interdependent skill-building and awareness in good faith and engagement.</p>
+
+        <h4 class="memo-h">Scope</h4>
+        <p class="memo-body">The scope of this Memoranda of Understanding (MoU) is as follows: the instructions for our project, "A Beginner's Guide to Makeup Application," caters to interested audience members within WRT 307 Cohort who are applying makeup for the first time (or is interested in sharing an easy-to-follow tutorial with a friend). Commencing with required materials, we have sectioned off the listing of cosmetic products and application tools. Following this, we have sequentially arranged the application process for the cosmetic products, to which coincides with the recommended usage approach of the application tools. Through these instructions, we were able to assess the levels of success that our project volunteers experienced as well as pain points that they encountered.</p>
+
+        <h4 class="memo-h">Agreed Upon Roles &amp; Responsibilities</h4>
+        <p class="memo-body">The project was composed collaboratively with Ella hosting our HTML website, Kriston sourcing our project volunteers, Emma devising the instructions, Amirah proofreading our contributions, and Jamyka composing the professional memo.</p>
+
       </div>
     </div>
 
@@ -708,11 +706,9 @@
           <h4 class="rep-h">Testing Results</h4>
           <p class="rep-body">Three people followed the makeup routine and provided feedback. Photos of each subject during testing are included below.</p>
 
-          <!-- ANNA JACK — paste her photo URL into src="" below -->
           <div class="tester-card">
             <div class="tester-photo-wrap">
-              <img src="img/AJ.png" alt="Anna Jack"
-                onerror="this.closest('.tester-photo-wrap').innerHTML='<div class=\'tester-photo-placeholder\'><span class=\'tester-ph-init\'>AJ</span></div>'"/>
+              <img src="img/AJ.png" alt="Anna Jack" onerror="this.closest('.tester-photo-wrap').innerHTML='<div class=\'tester-photo-placeholder\'><span class=\'tester-ph-init\'>AJ</span></div>'"/>
             </div>
             <div class="tester-info">
               <div class="tester-name">Anna Jack</div>
@@ -720,11 +716,9 @@
             </div>
           </div>
 
-          <!-- ALEX LAKE — paste her photo URL into src="" below -->
           <div class="tester-card">
             <div class="tester-photo-wrap">
-              <img src="img/AL.png" alt="Alex Lake"
-                onerror="this.closest('.tester-photo-wrap').innerHTML='<div class=\'tester-photo-placeholder\'><span class=\'tester-ph-init\'>AL</span></div>'"/>
+              <img src="img/AL.png" alt="Alex Lake" onerror="this.closest('.tester-photo-wrap').innerHTML='<div class=\'tester-photo-placeholder\'><span class=\'tester-ph-init\'>AL</span></div>'"/>
             </div>
             <div class="tester-info">
               <div class="tester-name">Alex Lake</div>
@@ -732,11 +726,9 @@
             </div>
           </div>
 
-          <!-- MAYA PINGLAY — paste her photo URL into src="" below -->
           <div class="tester-card">
             <div class="tester-photo-wrap">
-              <img src="img/MP.png" alt="Maya Pinglay"
-                onerror="this.closest('.tester-photo-wrap').innerHTML='<div class=\'tester-photo-placeholder\'><span class=\'tester-ph-init\'>MP</span></div>'"/>
+              <img src="img/MP.png" alt="Maya Pinglay" onerror="this.closest('.tester-photo-wrap').innerHTML='<div class=\'tester-photo-placeholder\'><span class=\'tester-ph-init\'>MP</span></div>'"/>
             </div>
             <div class="tester-info">
               <div class="tester-name">Maya Pinglay</div>
@@ -744,7 +736,7 @@
             </div>
           </div>
 
-        </div><!-- /rep-block testing results -->
+        </div>
 
         <div class="rep-block">
           <h4 class="rep-h">Troubleshooting Guide</h4>
@@ -753,7 +745,6 @@
             <li><svg style="flex-shrink:0;margin-top:4px" width="11" height="13" viewBox="0 0 12 14" xmlns="http://www.w3.org/2000/svg"><path d="M6 13C6 13 1 9.4 1 5.4C1 3 3.2 1 6 1C8.8 1 11 3 11 5.4C11 9.4 6 13 6 13Z" fill="#c4527a"/><path d="M6 1Q7.8 3.5 6 6Q4.2 3.5 6 1Z" fill="rgba(255,255,255,.35)"/></svg><span><strong>Skin tint looks patchy:</strong> The formula may have been applied to dry skin. Dampen your sponge more thoroughly and blend in smaller sections.</span></li>
             <li><svg style="flex-shrink:0;margin-top:4px" width="11" height="13" viewBox="0 0 12 14" xmlns="http://www.w3.org/2000/svg"><path d="M6 13C6 13 1 9.4 1 5.4C1 3 3.2 1 6 1C8.8 1 11 3 11 5.4C11 9.4 6 13 6 13Z" fill="#c4527a"/><path d="M6 1Q7.8 3.5 6 6Q4.2 3.5 6 1Z" fill="rgba(255,255,255,.35)"/></svg><span><strong>Bronzer looks muddy:</strong> You may have applied too much. Buff in circular motions with a clean brush to diffuse the product.</span></li>
             <li><svg style="flex-shrink:0;margin-top:4px" width="11" height="13" viewBox="0 0 12 14" xmlns="http://www.w3.org/2000/svg"><path d="M6 13C6 13 1 9.4 1 5.4C1 3 3.2 1 6 1C8.8 1 11 3 11 5.4C11 9.4 6 13 6 13Z" fill="#c4527a"/><path d="M6 1Q7.8 3.5 6 6Q4.2 3.5 6 1Z" fill="rgba(255,255,255,.35)"/></svg><span><strong>Eyeliner smudges:</strong> Allow the liner to set for 30 seconds before blinking; consider a waterproof formula.</span></li>
-            <li><svg style="flex-shrink:0;margin-top:4px" width="11" height="13" viewBox="0 0 12 14" xmlns="http://www.w3.org/2000/svg"><path d="M6 13C6 13 1 9.4 1 5.4C1 3 3.2 1 6 1C8.8 1 11 3 11 5.4C11 9.4 6 13 6 13Z" fill="#c4527a"/><path d="M6 1Q7.8 3.5 6 6Q4.2 3.5 6 1Z" fill="rgba(255,255,255,.35)"/></svg>[Add additional troubleshooting based on testing results]</li>
           </ul>
         </div>
 
