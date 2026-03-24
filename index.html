@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>G3 — Makeup Instructions</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --pink-bg:    #f9d6e0;
+      --sidebar-bg: #a0395a;
+      --header-bg:  #2f1c22;
+      --accent:     #c4527a;
+      --accent-lt:  #e8a0b8;
+      --plum:       #7b3b6e;
+      --body-bg:    #ffffff;
+      --surface:    #ffffff;
+      --surface2:   #fdf7f9;
+      --text:       #2d1f27;
+      --mid:        #6b4d58;
+      --muted:      #9e7d8a;
+      --border:     #e8d0d8;
+      --border-lt:  #f2e4e9;
+      --header-h:   66px;
+      --sidebar-w:  210px;
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { height: 100%; overflow: hidden; }
+    body { font-family: 'Lato', sans-serif; background: var(--pink-bg); color: var(--text); display: flex; flex-direction: column; }
+
+    /* ── HEADER ── */
+    .site-header {
+      height: var(--header-h);
+      flex-shrink: 0;
+      background: var(--header-bg);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 36px 0 28px;
+      z-index: 300;
+      box-shadow: 0 2px 16px rgba(47,28,34,.5);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .site-header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: .08;
+      background:
+        radial-gradient(ellipse 30px 18px at 78% 40%, #f2c0d3 0%, transparent 100%),
+        radial-gradient(ellipse 22px 14px at 84% 60%, #f2c0d3 0%, transparent 100%),
+        radial-gradient(ellipse 26px 16px at 88% 30%, #f2c0d3 0%, transparent 100%);
+    }
+
+    .header-brand { display: flex; align-items: center; gap: 14px; position: relative; z-index: 2; }
+    .brand-logo { height: 42px; width: auto; display: block; }
+    .brand-name { font-family: 'Great Vibes', cursive; font-size: 2.8rem; font-weight: 400; color: #fff; letter-spacing: .02em; line-height: 1; }
+    .brand-tag { font-size: .62rem; letter-spacing: .25em; text-transform: uppercase; color: rgba(255,255,255,.55); font-weight: 300; }
+    .header-course { font-size: .72rem; letter-spacing: .16em; text-transform: uppercase; color: rgba(255,255,255,.45); position: relative; z-index: 2; }
+
+    /* ── LAYOUT ── */
+    .body-wrap { flex: 1; display: flex; overflow: hidden; }
+
+    /* ── SIDEBAR ── */
+    .sidebar {
+      width: var(--sidebar-w);
+      flex-shrink: 0;
+      background: var(--sidebar-bg);
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+      overflow-x: hidden;
+      box-shadow: 3px 0 20px rgba(100,20,50,.2);
+      z-index: 200;
+    }
+
+    .sidebar-inner { padding: 28px 0 16px; flex: 1; }
+    .sidebar-lbl { font-size: .6rem; letter-spacing: .35em; text-transform: uppercase; color: rgba(255,255,255,.35); padding: 0 20px 12px; display: block; border-bottom: 1px solid rgba(255,255,255,.1); margin-bottom: 4px; }
+
+    .sidebar nav a {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      padding: 12px 20px;
+      font-size: .9rem;
+      font-weight: 400;
+      color: rgba(255,255,255,.72);
+      text-decoration: none;
+      letter-spacing: .02em;
+      border-left: 3px solid transparent;
+      transition: background .18s, color .18s, border-color .18s, padding-left .18s;
+    }
+
+    .sidebar nav a .pt { flex-shrink: 0; opacity: .4; transition: opacity .2s, transform .2s; }
+    .sidebar nav a:hover { background: rgba(255,255,255,.1); color: #fff; border-left-color: var(--accent-lt); padding-left: 25px; }
+    .sidebar nav a:hover .pt { opacity: .85; transform: scale(1.1); }
+    .sidebar nav a.active { background: rgba(255,255,255,.16); color: #fff; font-weight: 700; border-left-color: #fff; }
+    .sidebar nav a.active .pt { opacity: 1; }
+
+    .sidebar-foot { padding: 16px 20px; border-top: 1px solid rgba(255,255,255,.1); margin-top: auto; }
+    .sidebar-foot p { font-size: .68rem; color: rgba(255,255,255,.3); line-height: 1.7; }
+
+    /* ── MAIN ── */
+    .main-content { flex: 1; overflow-y: auto; overflow-x: hidden; min-width: 0; background: var(--body-bg); }
+    .main-content::-webkit-scrollbar { width: 5px; }
+    .main-content::-webkit-scrollbar-thumb { background: var(--border); }
+
+    .page-section { display: none; }
+    .page-section.active { display: block; animation: fadeUp .3s ease; }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* ── SECTION BANNER ── */
+    .section-banner {
+      background: linear-gradient(135deg, var(--plum) 0%, var(--accent) 55%, var(--accent-lt) 100%);
+      padding: 52px 60px 44px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .section-banner::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: .1;
+      background:
+        radial-gradient(ellipse 60px 34px at 88% 75%, #fff 0%, transparent 100%),
+        radial-gradient(ellipse 50px 28px at 76% 20%, #fff 0%, transparent 100%),
+        radial-gradient(ellipse 40px 22px at 94% 40%, #fff 0%, transparent 100%);
+    }
+
+    .ban-eye { font-size: .68rem; letter-spacing: .32em; text-transform: uppercase; color: rgba(255,255,255,.58); font-weight: 400; margin-bottom: 10px; }
+    .section-banner h2 { font-family: 'Playfair Display', serif; font-size: clamp(2.2rem, 3.6vw, 3.4rem); font-weight: 700; color: #fff; line-height: 1.1; }
+    .ban-sub { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: rgba(255,255,255,.68); margin-top: 8px; font-style: italic; }
+
+    /* ── HOME HERO ── */
+    .home-hero { display: grid; grid-template-columns: 1.1fr .9fr; min-height: calc(100vh - var(--header-h)); }
+
+    .home-left {
+      background: linear-gradient(140deg, var(--plum) 0%, var(--accent) 62%, #d47a9a 100%);
+      padding: 72px 60px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .home-left::before { content: ''; position: absolute; top: 28px; right: 32px; width: 90px; height: 130px; background: rgba(255,255,255,.07); border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%; transform: rotate(-18deg); pointer-events: none; }
+    .home-left::after { content: ''; position: absolute; bottom: 22px; left: 22px; width: 70px; height: 100px; background: rgba(255,255,255,.05); border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%; transform: rotate(25deg); pointer-events: none; }
+
+    .home-eye { font-size: .68rem; letter-spacing: .32em; text-transform: uppercase; color: rgba(255,255,255,.54); margin-bottom: 18px; }
+    .home-title { font-family: 'Playfair Display', serif; font-size: clamp(3rem, 4.8vw, 5rem); font-weight: 700; color: #fff; line-height: 1.06; margin-bottom: 10px; }
+    .home-title em { font-style: italic; color: #f2c0d3; }
+    .home-sub { font-family: 'Playfair Display', serif; font-size: clamp(1.2rem, 1.9vw, 1.8rem); font-weight: 400; font-style: italic; color: rgba(255,255,255,.65); margin-bottom: 28px; }
+    .home-desc { font-size: 1rem; line-height: 1.9; color: rgba(255,255,255,.75); max-width: 460px; margin-bottom: 36px; font-weight: 300; }
+    .home-tags { display: flex; flex-wrap: wrap; gap: 10px; }
+    .home-tag { border: 1px solid rgba(255,255,255,.28); padding: 6px 16px; font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.82); }
+
+    .home-right { background: var(--surface2); display: flex; flex-direction: column; justify-content: center; padding: 60px 52px; gap: 20px; }
+    .home-rlbl { font-size: .68rem; letter-spacing: .28em; text-transform: uppercase; color: var(--accent); font-weight: 700; margin-bottom: 4px; }
+
+    .look-mod { display: flex; align-items: stretch; border: 1px solid var(--border); background: var(--surface); transition: transform .2s, box-shadow .2s, border-color .2s; }
+    .look-mod:hover { transform: translateX(4px); border-color: var(--accent); box-shadow: -4px 0 0 var(--accent), 4px 8px 20px rgba(180,70,110,.1); }
+    .look-mod-n { width: 56px; flex-shrink: 0; background: var(--pink-bg); display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-size: 1.65rem; color: var(--accent); font-weight: 400; font-style: italic; }
+    .look-mod-b { padding: 16px 20px; }
+    .look-mod-b strong { display: block; font-size: .95rem; letter-spacing: .04em; color: var(--plum); font-weight: 700; margin-bottom: 4px; }
+    .look-mod-b span { font-size: .84rem; color: var(--muted); line-height: 1.6; }
+
+    /* ── HOME IMAGE BOX ── */
+    .home-img-box {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      overflow: hidden;
+      background: var(--surface2);
+      border: 0px solid var(--border);
+    }
+
+    .home-img-box img {
+      width: 120%;
+      height: 90%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* ── BIOS ── */
+    .bio-outer { padding: 44px 60px; display: flex; flex-direction: column; gap: 20px; }
+
+    .bio-card { display: grid; grid-template-columns: 200px 1fr; align-items: start; gap: 28px; background: var(--surface); border: 1px solid var(--border); padding: 20px; transition: transform .2s, box-shadow .2s; }
+    .bio-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(180,70,110,.1); }
+
+    .bio-photo-wrap { width: 100%; aspect-ratio: 1 / 1; overflow: hidden; background: var(--surface2); }
+    .bio-photo-wrap img { width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; transition: transform .4s ease; }
+    .bio-card:hover .bio-photo-wrap img { transform: scale(1.04); }
+
+    .bio-ph-placeholder { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, var(--pink-bg), #f0d0de); }
+    .bio-ph-init { font-family: 'Playfair Display', serif; font-size: 2.2rem; color: var(--accent); font-weight: 400; font-style: italic; }
+
+    .bio-content { padding: 4px 0 0; }
+    .bio-name { font-family: 'Playfair Display', serif; font-size: 1.35rem; color: var(--plum); font-weight: 600; letter-spacing: .02em; margin-bottom: 4px; }
+    .bio-role { font-size: .62rem; letter-spacing: .22em; text-transform: uppercase; color: var(--accent); font-weight: 700; display: block; margin-bottom: 12px; }
+    .bio-text { font-size: 1rem; line-height: 1.9; color: var(--mid); }
+
+    /* ── MATERIALS ── */
+    .mat-section { background: var(--surface2); padding: 48px 60px; border-bottom: 1px solid var(--border); }
+    .mat-h { font-family: 'Playfair Display', serif; font-size: 1.9rem; color: var(--plum); font-weight: 600; margin-bottom: 6px; }
+    .mat-sub { font-size: .96rem; color: var(--muted); margin-bottom: 30px; line-height: 1.8; }
+    .mat-inner { max-width: 960px; margin: 0 auto; }
+    .mat-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 44px; }
+    .mat-col-lbl { font-size: .68rem; letter-spacing: .28em; text-transform: uppercase; color: var(--accent); font-weight: 700; margin-bottom: 14px; padding-bottom: 10px; border-bottom: 2px solid var(--accent-lt); }
+    .mat-item { display: flex; align-items: flex-start; gap: 10px; padding: 10px 0; border-bottom: 1px solid var(--border-lt); }
+    .mat-item:last-child { border-bottom: none; }
+    .mat-iname { font-size: .98rem; font-weight: 700; color: var(--text); display: block; margin-bottom: 2px; }
+    .mat-idesc { font-size: .85rem; color: var(--muted); line-height: 1.6; }
+
+    /* ── STEPS ── */
+    .steps-note { background: var(--plum); color: rgba(255,255,255,.88); padding: 18px 60px; font-size: .98rem; line-height: 1.9; }
+    .steps-note strong { color: #f2c0d3; }
+
+    .steps-content-wrap { display: grid; grid-template-columns: 1fr 480px; align-items: start; gap: 0; }
+
+    .steps-scroll-col { overflow-y: auto; padding: 0 48px 76px 60px; }
+
+    .steps-sticky-col { position: sticky; top: 0; padding: 24px 32px 24px 0; display: flex; flex-direction: column; gap: 12px; }
+    .sticky-img-lbl { font-size: .62rem; letter-spacing: .28em; text-transform: uppercase; color: var(--accent); font-weight: 700; }
+
+    /* ── STICKY IMAGE ── */
+    .sticky-img-box {
+      width: 100%;
+      aspect-ratio: 3 / 4;
+      overflow: hidden;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+    }
+
+    .sticky-img-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* COLLAPSIBLE STEP ROWS */
+    .step-row { border-bottom: 1px solid var(--border); }
+    .step-row:last-child { border-bottom: none; }
+
+    .step-header { display: grid; grid-template-columns: 64px 1fr auto; align-items: center; padding: 24px 0 0; cursor: pointer; user-select: none; }
+    .step-header:hover .step-title { color: var(--accent); }
+
+    .step-nc { display: flex; flex-direction: column; align-items: center; padding-top: 4px; gap: 10px; }
+    .step-num { font-family: 'Playfair Display', serif; font-size: 2.4rem; color: var(--border); font-weight: 700; line-height: 1; }
+    .step-ln { width: 1px; height: 40px; background: var(--border); }
+    .step-title-wrap { padding-left: 26px; }
+    .step-title { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--plum); font-weight: 600; transition: color .18s; }
+
+    .step-chevron { width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; color: var(--muted); transition: transform .25s ease; flex-shrink: 0; }
+    .step-chevron svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2; }
+    .step-row.open .step-chevron { transform: rotate(180deg); }
+
+    .step-body-wrap { display: grid; grid-template-columns: 64px 1fr; padding-bottom: 20px; }
+    .step-spacer { }
+    .step-body-col { padding-left: 26px; padding-top: 10px; }
+
+    .step-body { font-size: 1rem; line-height: 1.95; color: var(--mid); max-width: 520px; overflow: hidden; max-height: 0; opacity: 0; transition: max-height .3s ease, opacity .25s ease, margin .25s ease; margin-bottom: 0; }
+    .step-row.open .step-body { max-height: 300px; opacity: 1; margin-bottom: 4px; }
+
+    /* ── MEMO ── */
+    .memo-wrap { max-width: 820px; padding: 52px 60px; margin: 0 auto; }
+    .memo-simple { font-size: 1.02rem; line-height: 2; color: var(--mid); margin-bottom: 36px; }
+    .memo-simple strong { color: var(--plum); }
+    .memo-h { font-family: 'Playfair Display', serif; font-size: 1.4rem; color: var(--plum); font-weight: 600; margin-bottom: 14px; padding-bottom: 8px; border-bottom: 2px solid var(--accent-lt); }
+    .memo-body { font-size: 1.02rem; line-height: 2; color: var(--mid); }
+
+    /* ── TESTER CARDS ── */
+    .tester-card { display: grid; grid-template-columns: 320px 1fr; gap: 32px; align-items: start; padding: 28px; background: var(--surface); border: 1px solid var(--border); margin-bottom: 24px; transition: transform .2s, box-shadow .2s; }
+    .tester-card:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(180,70,110,.08); }
+
+    /* ── TESTER PHOTO ── */
+    .tester-photo-wrap {
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      overflow: hidden;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    .tester-photo-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+    }
+
+    .tester-photo-placeholder {
+      width: 100%; height: 100%;
+      display: flex; align-items: center; justify-content: center;
+      background: linear-gradient(135deg, var(--pink-bg), #f0d0de);
+    }
+
+    .tester-ph-init { font-family: 'Playfair Display', serif; font-size: 1.8rem; color: var(--accent); font-weight: 400; font-style: italic; }
+
+    .tester-info { padding-top: 2px; }
+    .tester-name { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: var(--plum); font-weight: 600; margin-bottom: 4px; }
+    .tester-role { font-size: .6rem; letter-spacing: .2em; text-transform: uppercase; color: var(--accent); font-weight: 700; display: block; margin-bottom: 10px; }
+    .tester-text { font-size: .94rem; line-height: 1.85; color: var(--mid); }
+
+    /* ── USABILITY ── */
+    .report-wrap { max-width: 920px; padding: 52px 60px; margin: 0 auto; }
+    .rep-block { margin-bottom: 42px; }
+
+    .rep-h { font-family: 'Playfair Display', serif; font-size: 1.4rem; color: var(--plum); font-weight: 600; margin-bottom: 14px; padding-bottom: 8px; border-bottom: 2px solid var(--accent-lt); }
+    .rep-body { font-size: 1rem; line-height: 1.95; color: var(--mid); margin-bottom: 14px; }
+    .rep-list { list-style: none; padding: 0; }
+    .rep-list li { display: flex; align-items: flex-start; gap: 11px; padding: 10px 0; border-bottom: 1px solid var(--border-lt); font-size: .98rem; color: var(--mid); line-height: 1.8; }
+    .rep-list li:last-child { border-bottom: none; }
+
+    .data-table { width: 100%; border-collapse: collapse; font-size: .94rem; }
+    .data-table th { text-align: left; padding: 12px 16px; font-size: .66rem; letter-spacing: .18em; text-transform: uppercase; background: var(--accent); color: #fff; font-weight: 700; }
+    .data-table td { padding: 13px 16px; border-bottom: 1px solid var(--border-lt); color: var(--mid); line-height: 1.7; }
+    .data-table tr:nth-child(even) td { background: var(--surface2); }
+    .data-table tr:hover td { background: #fce8f0; }
+
+    .badge { display: inline-block; padding: 3px 10px; font-size: .72rem; font-weight: 700; }
+    .badge.green { background: #eaf5ea; color: #2a7a32; }
+    .badge.yellow { background: #fff3cd; color: #9a6800; }
+
+    /* ── FOOTER ── */
+    footer { border-top: 1px solid var(--border); padding: 14px 32px; display: flex; align-items: center; justify-content: space-between; flex-shrink: 0; background: var(--surface); }
+    .foot-brand { font-family: 'Great Vibes', cursive; font-size: 1.65rem; color: var(--accent); letter-spacing: .03em; line-height: 1; }
+    .foot-copy { font-size: .74rem; color: var(--muted); letter-spacing: .06em; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 960px) {
+      .home-hero { grid-template-columns: 1fr; min-height: auto; }
+      .home-right { padding: 40px 40px; }
+      .mat-cols { grid-template-columns: 1fr; gap: 24px; }
+      .bio-card { grid-template-columns: 160px 1fr; gap: 20px; }
+      .section-banner, .mat-section, .steps-note,
+      .memo-wrap, .report-wrap, .bio-outer { padding-left: 36px; padding-right: 36px; }
+      .steps-content-wrap { grid-template-columns: 1fr; }
+      .steps-sticky-col { position: static; padding: 20px 36px; }
+      .sticky-img-box { aspect-ratio: 16/9; }
+    }
+
+    @media (max-width: 680px) {
+      .sidebar { width: 160px; }
+      .bio-card, .tester-card { grid-template-columns: 1fr; }
+      .section-banner, .mat-section, .steps-note,
+      .memo-wrap, .report-wrap, .bio-outer { padding-left: 24px; padding-right: 24px; }
+      .home-left, .home-right { padding: 40px 24px; }
+      .step-header { grid-template-columns: 1fr auto; }
+      .step-body-wrap { grid-template-columns: 1fr; }
+      .step-body-col { padding-left: 0; }
+      .step-nc { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── HEADER ── -->
+<header class="site-header">
+  <div class="header-brand">
+    <!-- To use your logo: replace the span with <img class="brand-logo" src="YOUR_LOGO_URL" alt="G3"> -->
+    <span class="brand-name">G3</span>
+    <span class="brand-tag">Makeup Instructions</span>
+  </div>
+</header>
+
+<div class="body-wrap">
+
+  <!-- ── SIDEBAR ── -->
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+      <span class="sidebar-lbl"></span>
+      <nav>
+        <a href="#" class="active" onclick="return go('home',this)">
+          <svg class="pt" width="14" height="16" viewBox="0 0 14 16" xmlns="http://www.w3.org/2000/svg">
+            <path d="M7 15C7 15 1.2 11 1.2 6.4C1.2 3.4 3.8 1 7 1C10.2 1 12.8 3.4 12.8 6.4C12.8 11 7 15 7 15Z" fill="#f2c0d3"/>
+            <path d="M7 15C7 15 1.2 11 1.2 6.4" stroke="rgba(255,255,255,.35)" stroke-width=".6" fill="none"/>
+            <path d="M7 1.5Q9 4.2 7 7Q5 4.2 7 1.5Z" fill="rgba(255,255,255,.28)"/>
+          </svg>
+          Home
+        </a>
+        <a href="#" onclick="return go('team',this)">
+          <svg class="pt" width="14" height="16" viewBox="0 0 14 16" xmlns="http://www.w3.org/2000/svg">
+            <path d="M7 15C7 15 1.2 11 1.2 6.4C1.2 3.4 3.8 1 7 1C10.2 1 12.8 3.4 12.8 6.4C12.8 11 7 15 7 15Z" fill="#f2c0d3"/>
+            <path d="M7 15C7 15 1.2 11 1.2 6.4" stroke="rgba(255,255,255,.35)" stroke-width=".6" fill="none"/>
+            <path d="M7 1.5Q9 4.2 7 7Q5 4.2 7 1.5Z" fill="rgba(255,255,255,.28)"/>
+          </svg>
+          Team Bios
+        </a>
+        <a href="#" onclick="return go('steps',this)">
+          <svg class="pt" width="14" height="16" viewBox="0 0 14 16" xmlns="http://www.w3.org/2000/svg">
+            <path d="M7 15C7 15 1.2 11 1.2 6.4C1.2 3.4 3.8 1 7 1C10.2 1 12.8 3.4 12.8 6.4C12.8 11 7 15 7 15Z" fill="#f2c0d3"/>
+            <path d="M7 15C7 15 1.2 11 1.2 6.4" stroke="rgba(255,255,255,.35)" stroke-width=".6" fill="none"/>
+            <path d="M7 1.5Q9 4.2 7 7Q5 4.2 7 1.5Z" fill="rgba(255,255,255,.28)"/>
+          </svg>
+          Instructions
+        </a>
+        <a href="#" onclick="return go('memo',this)">
+          <svg class="pt" width="14" height="16" viewBox="0 0 14 16" xmlns="http://www.w3.org/2000/svg">
+            <path d="M7 15C7 15 1.2 11 1.2 6.4C1.2 3.4 3.8 1 7 1C10.2 1 12.8 3.4 12.8 6.4C12.8 11 7 15 7 15Z" fill="#f2c0d3"/>
+            <path d="M7 15C7 15 1.2 11 1.2 6.4" stroke="rgba(255,255,255,.35)" stroke-width=".6" fill="none"/>
+            <path d="M7 1.5Q9 4.2 7 7Q5 4.2 7 1.5Z" fill="rgba(255,255,255,.28)"/>
+          </svg>
+          Design Memo
+        </a>
+        <a href="#" onclick="return go('usability',this)">
+          <svg class="pt" width="14" height="16" viewBox="0 0 14 16" xmlns="http://www.w3.org/2000/svg">
+            <path d="M7 15C7 15 1.2 11 1.2 6.4C1.2 3.4 3.8 1 7 1C10.2 1 12.8 3.4 12.8 6.4C12.8 11 7 15 7 15Z" fill="#f2c0d3"/>
+            <path d="M7 15C7 15 1.2 11 1.2 6.4" stroke="rgba(255,255,255,.35)" stroke-width=".6" fill="none"/>
+            <path d="M7 1.5Q9 4.2 7 7Q5 4.2 7 1.5Z" fill="rgba(255,255,255,.28)"/>
+          </svg>
+          Usability Report
+        </a>
+      </nav>
+    </div>
+    <div class="sidebar-foot"></div>
+  </aside>
+
+  <!-- ── MAIN ── -->
+  <main class="main-content" id="main">
+
+    <!-- HOME -->
+    <div id="home" class="page-section active">
+      <div class="home-hero">
+        <div class="home-left">
+          <h1 class="home-title">Makeup Instructions</h1>
+          <p class="home-sub">A complete guide to a polished look for all.</p>
+          <p class="home-desc">Whether you're new to makeup or refining your routine, this guide walks you through a complete look that lasts all day or night. Clear, step-by-step, and accessible to all skill levels.</p>
+          <div class="home-tags">
+            <span class="home-tag">20–35 minutes</span>
+            <span class="home-tag">Beginner-friendly</span>
+            <span class="home-tag">10 Steps</span>
+            <span class="home-tag">For All Ages</span>
+          </div>
+        </div>
+        <div class="home-right">
+          <p class="home-rlbl">What You'll Learn</p>
+          <div class="look-mod"><div class="look-mod-n">I</div><div class="look-mod-b"><strong>Skin Base</strong><span>Steps 1–3 · Skin tint, brows, concealer</span></div></div>
+          <div class="look-mod"><div class="look-mod-n">II</div><div class="look-mod-b"><strong>Contour &amp; Color</strong><span>Steps 4–7 · Bronzer, blush, powder, highlight</span></div></div>
+          <div class="look-mod"><div class="look-mod-n">III</div><div class="look-mod-b"><strong>Eyes &amp; Lips</strong><span>Steps 8–10 · Eyeliner, lipliner, mascara</span></div></div>
+
+          <!-- HOME PRODUCT PHOTO — paste your image URL into src="" below -->
+          <div class="home-img-box">
+            <img src="img/22.png" alt="Product photo"
+              onerror="this.style.display='none'"/>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TEAM BIOS — alphabetical by last name: Argaez, Britt, Cohn, Noard, Smith -->
+    <div id="team" class="page-section">
+      <div class="section-banner">
+        <h2>Meet the Team</h2>
+      </div>
+
+      <div class="bio-outer">
+
+        <div class="bio-card">
+          <div class="bio-photo-wrap">
+            <img src="img/EG.png" alt="Emma Argaez" onerror="this.closest('.bio-photo-wrap').innerHTML='<div class=\'bio-ph-placeholder\'><span class=\'bio-ph-init\'>EA</span></div>'"/>
+          </div>
+          <div class="bio-content">
+            <div class="bio-name">Emma Argaez</div>
+            <p class="bio-text">Emma Argaez spent her life as a pre-professional ballet dancer, a career that required mastering high-stakes transformation in front of the mirror. Through years of live performances and specialized makeup seminars, she gained hands-on experience with every imaginable style and technique. From delicate classical looks to bold stage variations, Emma has truly done it all. Her unique background allows her to break down professional secrets into easy, actionable steps for anyone to follow. Now, she is dedicated to sharing her lifetime of expertise to help you achieve professional-grade results for any occasion.</p>
+          </div>
+        </div>
+
+        <div class="bio-card">
+          <div class="bio-photo-wrap">
+            <img src="img/AB.png" alt="Amirah Britt" onerror="this.closest('.bio-photo-wrap').innerHTML='<div class=\'bio-ph-placeholder\'><span class=\'bio-ph-init\'>AB</span></div>'"/>
+          </div>
+          <div class="bio-content">
+            <div class="bio-name">Amirah Britt</div>
+            <p class="bio-text">Amirah Britt is a senior at Syracuse University with a concentration in Cybersecurity, on her way to a career as a cybersecurity analyst. She is passionate about entrepreneurship and financial freedom, with long-term goals in franchisee ownership. Outside of academics, Amirah enjoys designing for her clothing brand and has interests in health, wellness, and skincare. She is driven by a desire to build something meaningful and make lasting memories along the way.</p>
+          </div>
+        </div>
+
+        <div class="bio-card">
+          <div class="bio-photo-wrap">
+            <img src="img/EC.png" alt="Ella Cohn" onerror="this.closest('.bio-photo-wrap').innerHTML='<div class=\'bio-ph-placeholder\'><span class=\'bio-ph-init\'>EC</span></div>'"/>
+          </div>
+          <div class="bio-content">
+            <div class="bio-name">Ella Cohn</div>
+            <p class="bio-text">Ella Cohn is a senior at Syracuse University's Martin J. Whitman School of Management pursuing a dual major in Business Analytics and Finance. Through her coursework, she has developed experience with data visualization, statistical analysis, and financial modeling. On campus, she is involved in several service and student organizations, including the Community Service Organization. Outside of academics, Ella enjoys drawing, photography, and spending time with friends.</p>
+          </div>
+        </div>
+
+        <div class="bio-card">
+          <div class="bio-photo-wrap">
+            <img src="img/KN.png" alt="Kriston Noard" onerror="this.closest('.bio-photo-wrap').innerHTML='<div class=\'bio-ph-placeholder\'><span class=\'bio-ph-init\'>KN</span></div>'"/>
+          </div>
+          <div class="bio-content">
+            <div class="bio-name">Kriston Noard</div>
+            <p class="bio-text">Kriston Noard is a junior at Syracuse University. She is majoring in Sport Management, and minoring in Marketing. Kriston is a very creative person, and she loves finding ways to express herself. Kriston, also, has a strong passion for sports, and watches them constantly. Her favorite sport to watch is football. She also loves reading, golfing, and going for walks in her free time.</p>
+          </div>
+        </div>
+
+        <div class="bio-card">
+          <div class="bio-photo-wrap">
+            <img src="img/JS.png" alt="Jamyka Smith" onerror="this.closest('.bio-photo-wrap').innerHTML='<div class=\'bio-ph-placeholder\'><span class=\'bio-ph-init\'>JS</span></div>'"/>
+          </div>
+          <div class="bio-content">
+            <div class="bio-name">Jamyka Smith</div>
+            <p class="bio-text">Jamyka Smith is a senior attending Syracuse University. With a background in Applied Data Analytics (major) and Architecture (minor), she hopes to establish a convergence between the two for this project as it pertains to makeup through kinesthetic analysis and the arts. Outside of class, she enjoys making practical crochet and other hobbyist projects for friends and family.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- INSTRUCTIONS -->
+    <div id="steps" class="page-section">
+      <div class="section-banner">
+        <h2>Instructions</h2>
+      </div>
+
+      <div class="mat-section">
+        <h3 class="mat-h">Required Materials</h3>
+        <p class="mat-sub">Gather everything below before you begin so you can move through each step without interruption.</p>
+        <div class="mat-inner">
+          <div class="mat-cols">
+            <div>
+              <p class="mat-col-lbl">A · Cosmetic Products</p>
+              <div class="mat-item"><svg style="margin-top:5px;flex-shrink:0" width="12" height="14" viewBox="0 0 12 14" xmlns="http://www.w3.org/2000/svg"><path d="M6 13C6 13 1 9.4 1 5.4C1 3 3.2 1 6 1C8.8 1 11 3 11 5.4C11 9.4 6 13 6 13Z" fill="#c4527a"/><path d="M6 1Q7.8 3.5 6 6Q4.2 3.5 6 1Z" fill="rgba(255,255,255,.35)"/></svg><div><span class="mat-iname">Skin Tint</span><span class="mat-idesc">Lightweight, sheer base</span></div></div>
+              <div class="mat-item"><svg style="margin-top:5px;flex-shrink:0" width="12" height="14" viewBox="0 0 12 14" xmlns="http://www.w3.org/2000/svg"><path d="M6 13C6 13 1 9.4 1 5.4C1 3 3.2 1 6 1C8.8 1 11 3 11 5.4C11 9.4 6 13 6 13Z" fill="#c4527a"/><path d="M6 1Q7.8 3.5 6 6Q4.2 3.5 6 1Z" fill="rgba(255,255,255,.35)"/></svg><div><span class="mat-iname">Eyebrow Gel</span><span class="mat-idesc">Tinted or clear formula for brow placement</span></div></div>
+              <div class="mat-item"><svg style="margin-top:5px;flex-shrink:0" width="12" height="14" viewBox="0 0 12 14" xmlns="http://www.w3.org/2000/svg"><path d="M6 13C6 13 1 9.4 1 5.4C1 3 3.2 1 6 1C8.8 1 11 3 11 5.4C11 9.4 6 13 6 13Z" fill="#c4527a"/><path d="M6 1Q7.8 3.5 6 6Q4.2 3.5 6 1Z" fill="rgba(255,255,255,.35)"/></svg><div><span class="mat-iname">Concealer</span><span class="mat-idesc">High-coverage cream or liquid for targeted areas</span></div></div>
+              <div class="mat-item"><svg style="margin-top:5px;flex-shrink:0" width="12" height="14" viewBox="0 0 12 14" xmlns="http://www.w3.org/2000/svg"><path d="M6 13C6 13 1 9.4 1 5.4C1 3 3.2 1 6 1C8.8 1 11 3 11 5.4C11 9.4 6 13 6 13Z" fill="#c4527a"/><path d="M6 1Q7.8 3.5 6 6Q4.2 3.5 6 1Z" fill="rgba(255,255,255,.35)"/></svg><div><span class="mat-iname">Bronzer</span><span class="mat-idesc">Powder or cream for warmth and contouring</span></div></div>
+              <div class="mat-item"><svg style="margin-top:5px;flex-shrink:0" width="12" height="14" viewBox="0 0 12 14" xmlns="http://www.w3.org/2000/svg"><path d="M6 13C6 13 1 9.4 1 5.4C1 3 3.2 1 6 1C8.8 1 11 3 11 5.4C11 9.4 6 13 6 13Z" fill="#c4527a"/><path d="M6 1Q7.8 3.5 6 6Q4.2 3.5 6 1Z" fill="rgba(255,255,255,.35)"/></svg><div><span class="mat-iname">Blush</span><span class="mat-idesc">Pink or peach-toned product for the cheeks</span></div></div>
+              <div class="mat-item"><svg style="margin-top:5px;flex-shrink:0" width="12" height="14" viewBox="0 0 12 14" xmlns="http://www.w3.org/2000/svg"><path d="M6 13C6 13 1 9.4 1 5.4C1 3 3.2 1 6 1C8.8 1 11 3 11 5.4C11 9.4 6 13 6 13Z" fill="#c4527a"/><path d="M6 1Q7.8 3.5 6 6Q4.2 3.5 6 1Z" fill="rgba(255,255,255,.35)"/></svg><div><span class="mat-iname">Setting Powder</span><span class="mat-idesc">Translucent or tinted powder to reduce shine</span></div></div>
+              <div class="mat-item"><svg style="margin-top:5px;flex-shrink:0" width="12" height="14" viewBox="0 0 12 14" xmlns="http://www.w3.org/2000/svg"><path d="M6 13C6 13 1 9.4 1 5.4C1 3 3.2 1 6 1C8.8 1 11 3 11 5.4C11 9.4 6 13 6 13Z" fill="#c4527a"/><path d="M6 1Q7.8 3.5 6 6Q4.2 3.5 6 1Z" fill="rgba(255,255,255,.35)"/></svg><div><span class="mat-iname">Highlighter</span><span class="mat-idesc">Shimmering powder or liquid for luminosity</span></div></div>
+              <div class="mat-item"><svg style="margin-top:5px;flex-shrink:0" width="12" height="14" viewBox="0 0 12 14" xmlns="http://www.w3.org/2000/svg"><path d="M6 13C6 13 1 9.4 1 5.4C1 3 3.2 1 6 1C8.8 1 11 3 11 5.4C11 9.4 6 13 6 13Z" fill="#c4527a"/><path d="M6 1Q7.8 3.5 6 6Q4.2 3.5 6 1Z" fill="rgba(255,255,255,.35)"/></svg><div><span class="mat-iname">Brown Eyeliner</span><span class="mat-idesc">Pencil or gel liner for soft eye definition</span></div></div>
+              <div class="mat-item"><svg style="margin-top:5px;flex-shrink:0" width="12" height="14" viewBox="0 0 12 14" xmlns="http://www.w3.org/2000/svg"><path d="M6 13C6 13 1 9.4 1 5.4C1 3 3.2 1 6 1C8.8 1 11 3 11 5.4C11 9.4 6 13 6 13Z" fill="#c4527a"/><path d="M6 1Q7.8 3.5 6 6Q4.2 3.5 6 1Z" fill="rgba(255,255,255,.35)"/></svg><div><span class="mat-iname">Lipliner</span><span class="mat-idesc">Pencil used to define the lip perimeter</span></div></div>
+              <div class="mat-item"><svg style="margin-top:5px;flex-shrink:0" width="12" height="14" viewBox="0 0 12 14" xmlns="http://www.w3.org/2000/svg"><path d="M6 13C6 13 1 9.4 1 5.4C1 3 3.2 1 6 1C8.8 1 11 3 11 5.4C11 9.4 6 13 6 13Z" fill="#c4527a"/><path d="M6 1Q7.8 3.5 6 6Q4.2 3.5 6 1Z" fill="rgba(255,255,255,.35)"/></svg><div><span class="mat-iname">Mascara</span><span class="mat-idesc">Lengthening or volumizing formula for lashes</span></div></div>
+            </div>
+            <div>
+              <p class="mat-col-lbl">B · Application Tools</p>
+              <div class="mat-item"><svg style="margin-top:5px;flex-shrink:0" width="12" height="14" viewBox="0 0 12 14" xmlns="http://www.w3.org/2000/svg"><path d="M6 13C6 13 1 9.4 1 5.4C1 3 3.2 1 6 1C8.8 1 11 3 11 5.4C11 9.4 6 13 6 13Z" fill="#c4527a"/><path d="M6 1Q7.8 3.5 6 6Q4.2 3.5 6 1Z" fill="rgba(255,255,255,.35)"/></svg><div><span class="mat-iname">Damp Makeup Sponge</span><span class="mat-idesc">For blending base products</span></div></div>
+              <div class="mat-item"><svg style="margin-top:5px;flex-shrink:0" width="12" height="14" viewBox="0 0 12 14" xmlns="http://www.w3.org/2000/svg"><path d="M6 13C6 13 1 9.4 1 5.4C1 3 3.2 1 6 1C8.8 1 11 3 11 5.4C11 9.4 6 13 6 13Z" fill="#c4527a"/><path d="M6 1Q7.8 3.5 6 6Q4.2 3.5 6 1Z" fill="rgba(255,255,255,.35)"/></svg><div><span class="mat-iname">Large Fluffy Brush</span><span class="mat-idesc">For bronzer application</span></div></div>
+              <div class="mat-item"><svg style="margin-top:5px;flex-shrink:0" width="12" height="14" viewBox="0 0 12 14" xmlns="http://www.w3.org/2000/svg"><path d="M6 13C6 13 1 9.4 1 5.4C1 3 3.2 1 6 1C8.8 1 11 3 11 5.4C11 9.4 6 13 6 13Z" fill="#c4527a"/><path d="M6 1Q7.8 3.5 6 6Q4.2 3.5 6 1Z" fill="rgba(255,255,255,.35)"/></svg><div><span class="mat-iname">Tapered Blush Brush</span><span class="mat-idesc">For precise cheek color placement</span></div></div>
+              <div class="mat-item"><svg style="margin-top:5px;flex-shrink:0" width="12" height="14" viewBox="0 0 12 14" xmlns="http://www.w3.org/2000/svg"><path d="M6 13C6 13 1 9.4 1 5.4C1 3 3.2 1 6 1C8.8 1 11 3 11 5.4C11 9.4 6 13 6 13Z" fill="#c4527a"/><path d="M6 1Q7.8 3.5 6 6Q4.2 3.5 6 1Z" fill="rgba(255,255,255,.35)"/></svg><div><span class="mat-iname">Medium Powder Brush</span><span class="mat-idesc">For dusting setting powder</span></div></div>
+              <div class="mat-item"><svg style="margin-top:5px;flex-shrink:0" width="12" height="14" viewBox="0 0 12 14" xmlns="http://www.w3.org/2000/svg"><path d="M6 13C6 13 1 9.4 1 5.4C1 3 3.2 1 6 1C8.8 1 11 3 11 5.4C11 9.4 6 13 6 13Z" fill="#c4527a"/><path d="M6 1Q7.8 3.5 6 6Q4.2 3.5 6 1Z" fill="rgba(255,255,255,.35)"/></svg><div><span class="mat-iname">Small Fan or Precision Brush</span><span class="mat-idesc">For applying highlighter</span></div></div>
+              <div class="mat-item"><svg style="margin-top:5px;flex-shrink:0" width="12" height="14" viewBox="0 0 12 14" xmlns="http://www.w3.org/2000/svg"><path d="M6 13C6 13 1 9.4 1 5.4C1 3 3.2 1 6 1C8.8 1 11 3 11 5.4C11 9.4 6 13 6 13Z" fill="#c4527a"/><path d="M6 1Q7.8 3.5 6 6Q4.2 3.5 6 1Z" fill="rgba(255,255,255,.35)"/></svg><div><span class="mat-iname">Small Dense Brush</span><span class="mat-idesc">For blending concealer</span></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="steps-note"><strong>Before you begin:</strong> Set up in a well-lit area with a mirror. Keep all materials within reach and complete each step in order — later steps build on earlier ones.</div>
+
+      <div class="steps-content-wrap">
+        <div class="steps-scroll-col">
+
+          <div class="step-row open">
+            <div class="step-header" onclick="toggleStep(this)">
+              <div class="step-nc"><span class="step-num">01</span></div>
+              <div class="step-title-wrap"><h4 class="step-title">Apply Skin Tint</h4></div>
+              <div class="step-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+            </div>
+            <div class="step-body-wrap"><div class="step-spacer"></div><div class="step-body-col"><p class="step-body">Dispense a small amount of skin tint and use your fingers or a damp makeup sponge to dot it onto the center of the face, blending outward in light, tapping motions until the finish is seamless and the skin tone is even.</p></div></div>
+          </div>
+
+          <div class="step-row open">
+            <div class="step-header" onclick="toggleStep(this)">
+              <div class="step-nc"><span class="step-num">02</span></div>
+              <div class="step-title-wrap"><h4 class="step-title">Apply Eyebrow Gel</h4></div>
+              <div class="step-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+            </div>
+            <div class="step-body-wrap"><div class="step-spacer"></div><div class="step-body-col"><p class="step-body">Define and set the eyebrows by using the built-in spoolie wand to comb the hairs in the direction they grow, then apply the gel in short, upward strokes following the natural arch to add definition.</p></div></div>
+          </div>
+
+          <div class="step-row open">
+            <div class="step-header" onclick="toggleStep(this)">
+              <div class="step-nc"><span class="step-num">03</span></div>
+              <div class="step-title-wrap"><h4 class="step-title">Apply Concealer</h4></div>
+              <div class="step-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+            </div>
+            <div class="step-body-wrap"><div class="step-spacer"></div><div class="step-body-col"><p class="step-body">Use the precision applicator to apply concealer in a "V" shape under the eyes and onto any blemishes, then gently blend the edges with your ring finger or a small, dense concealer brush so it merges perfectly with the base.</p></div></div>
+          </div>
+
+          <div class="step-row open">
+            <div class="step-header" onclick="toggleStep(this)">
+              <div class="step-nc"><span class="step-num">04</span></div>
+              <div class="step-title-wrap"><h4 class="step-title">Apply Bronzer</h4></div>
+              <div class="step-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+            </div>
+            <div class="step-body-wrap"><div class="step-spacer"></div><div class="step-body-col"><p class="step-body">Using a large, fluffy bronzer brush, lightly sweep the product along the temples, below the cheekbones, and across the hairline, blending thoroughly upward and outward to add warmth and dimension.</p></div></div>
+          </div>
+
+          <div class="step-row open">
+            <div class="step-header" onclick="toggleStep(this)">
+              <div class="step-nc"><span class="step-num">05</span></div>
+              <div class="step-title-wrap"><h4 class="step-title">Apply Blush</h4></div>
+              <div class="step-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+            </div>
+            <div class="step-body-wrap"><div class="step-spacer"></div><div class="step-body-col"><p class="step-body">Identify the "apples" of your cheeks by smiling slightly, then use a tapered blush brush to swirl the product onto the center and blend softly back toward the temples for a natural flush.</p></div></div>
+          </div>
+
+          <div class="step-row open">
+            <div class="step-header" onclick="toggleStep(this)">
+              <div class="step-nc"><span class="step-num">06</span></div>
+              <div class="step-title-wrap"><h4 class="step-title">Apply Setting Powder</h4></div>
+              <div class="step-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+            </div>
+            <div class="step-body-wrap"><div class="step-spacer"></div><div class="step-body-col"><p class="step-body">Lightly dip a medium, fluffy powder brush into the powder, tap off the excess, and gently dust the T-zone — forehead, nose, and chin — to lock the makeup in place and control shine.</p></div></div>
+          </div>
+
+          <div class="step-row open">
+            <div class="step-header" onclick="toggleStep(this)">
+              <div class="step-nc"><span class="step-num">07</span></div>
+              <div class="step-title-wrap"><h4 class="step-title">Apply Highlighter</h4></div>
+              <div class="step-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+            </div>
+            <div class="step-body-wrap"><div class="step-spacer"></div><div class="step-body-col"><p class="step-body">Use a small fan brush or your fingertip to apply highlighter along the high points of the face — the tops of the cheekbones, the bridge of the nose, and the Cupid's bow — blending well for a luminous finish.</p></div></div>
+          </div>
+
+          <div class="step-row open">
+            <div class="step-header" onclick="toggleStep(this)">
+              <div class="step-nc"><span class="step-num">08</span></div>
+              <div class="step-title-wrap"><h4 class="step-title">Apply Brown Eyeliner</h4></div>
+              <div class="step-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+            </div>
+            <div class="step-body-wrap"><div class="step-spacer"></div><div class="step-body-col"><p class="step-body">Gently pull the upper eyelid taut and use the eyeliner pencil or a fine-angled brush to apply the liner as close to the upper lash line as possible, starting from the inner corner and moving outward.</p></div></div>
+          </div>
+
+          <div class="step-row open">
+            <div class="step-header" onclick="toggleStep(this)">
+              <div class="step-nc"><span class="step-num">09</span></div>
+              <div class="step-title-wrap"><h4 class="step-title">Apply Lipliner</h4></div>
+              <div class="step-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+            </div>
+            <div class="step-body-wrap"><div class="step-spacer"></div><div class="step-body-col"><p class="step-body">Using the sharpened lipliner pencil, trace the natural perimeter of your lips starting at the center of the bottom lip and moving to the Cupid's bow to define the shape and prevent color bleeding.</p></div></div>
+          </div>
+
+          <div class="step-row open">
+            <div class="step-header" onclick="toggleStep(this)">
+              <div class="step-nc"><span class="step-num">10</span></div>
+              <div class="step-title-wrap"><h4 class="step-title">Apply Mascara</h4></div>
+              <div class="step-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+            </div>
+            <div class="step-body-wrap"><div class="step-spacer"></div><div class="step-body-col"><p class="step-body">Wiggle the mascara wand at the base of the upper lashes to deposit pigment, then comb upward through the lengths to lengthen and define the lashes for a finished look.</p></div></div>
+          </div>
+
+        </div><!-- /steps-scroll-col -->
+
+        <!-- STICKY REFERENCE IMAGE — paste your image URL into src="" below -->
+        <div class="steps-sticky-col">
+          <span class="sticky-img-lbl">Reference Image</span>
+          <div class="sticky-img-box">
+            <img src="img/Instructions drawing.png" alt="Reference image"
+              onerror="this.style.display='none'"/>
+          </div>
+        </div>
+
+      </div><!-- /steps-content-wrap -->
+    </div>
+
+    <!-- DESIGN MEMO -->
+    <div id="memo" class="page-section">
+      <div class="section-banner">
+        <h2>Design Memo</h2>
+      </div>
+
+      <div class="memo-wrap">
+        <p class="memo-simple">
+          <strong>To:</strong> Professor Weiner &amp; WRT 307 Class<br>
+          <strong>From:</strong> Emma Argaez, Amirah Britt, Ella Cohn, Kriston Noard, Jamyka Smith<br>
+          <strong>Date:</strong> March 24, 2026<br>
+          <strong>Subject:</strong> Design Memo - Makeup Instructions Project
+        </p>
+
+        <h4 class="memo-h"></h4>
+        <p class="memo-body">For this project, we decided to create a step-by-step guide for applying an everyday makeup look. We wanted something that felt approachable and easy to follow, no matter how much experience someone has with makeup. The routine covers ten steps, starting with skin tint as the base and working through concealer, bronzer, blush, setting powder, highlighter, eyebrow gel, brown eyeliner, lipliner, and mascara. The steps follow the natural order in which makeup is typically applied, building from base to finish. As a group, we agreed early on that including a facial diagram would make the instructions much easier to understand. Rather than relying only on written descriptions, we felt the visual would help users see exactly where each product goes on the face, making the written steps easier to follow along the way. Our usability testing backed up our approach. All three testers were able to follow the routine successfully and said they felt confident enough to do it again on their own.
+        </p>
+      </div>
+    </div>
+
+    <!-- USABILITY REPORT -->
+    <div id="usability" class="page-section">
+      <div class="section-banner">
+        <h2>Usability Report</h2>
+      </div>
+
+      <div class="report-wrap">
+
+        <div class="rep-block">
+          <h4 class="rep-h">Anticipated Problem Areas (Pre-Testing)</h4>
+          <p class="rep-body">Before conducting user tests, our team identified the following areas where users were most likely to encounter difficulty:</p>
+          <ul class="rep-list">
+            <li><svg style="flex-shrink:0;margin-top:4px" width="11" height="13" viewBox="0 0 12 14" xmlns="http://www.w3.org/2000/svg"><path d="M6 13C6 13 1 9.4 1 5.4C1 3 3.2 1 6 1C8.8 1 11 3 11 5.4C11 9.4 6 13 6 13Z" fill="#c4527a"/><path d="M6 1Q7.8 3.5 6 6Q4.2 3.5 6 1Z" fill="rgba(255,255,255,.35)"/></svg>Step 3 (concealer blending) — users may apply too much product or fail to fully blend edges.</li>
+            <li><svg style="flex-shrink:0;margin-top:4px" width="11" height="13" viewBox="0 0 12 14" xmlns="http://www.w3.org/2000/svg"><path d="M6 13C6 13 1 9.4 1 5.4C1 3 3.2 1 6 1C8.8 1 11 3 11 5.4C11 9.4 6 13 6 13Z" fill="#c4527a"/><path d="M6 1Q7.8 3.5 6 6Q4.2 3.5 6 1Z" fill="rgba(255,255,255,.35)"/></svg>Step 4 (bronzer placement) — the sweep direction and placement are not intuitive for beginners.</li>
+            <li><svg style="flex-shrink:0;margin-top:4px" width="11" height="13" viewBox="0 0 12 14" xmlns="http://www.w3.org/2000/svg"><path d="M6 13C6 13 1 9.4 1 5.4C1 3 3.2 1 6 1C8.8 1 11 3 11 5.4C11 9.4 6 13 6 13Z" fill="#c4527a"/><path d="M6 1Q7.8 3.5 6 6Q4.2 3.5 6 1Z" fill="rgba(255,255,255,.35)"/></svg>Step 8 (eyeliner) — staying close to the lash line requires practice and steady hand control.</li>
+          </ul>
+        </div>
+
+        <div class="rep-block">
+          <h4 class="rep-h">Testing Results</h4>
+          <p class="rep-body">Three people followed the makeup routine and provided feedback. Photos of each subject during testing are included below.</p>
+
+          <!-- ANNA JACK — paste her photo URL into src="" below -->
+          <div class="tester-card">
+            <div class="tester-photo-wrap">
+              <img src="img/AJ.png" alt="Anna Jack"
+                onerror="this.closest('.tester-photo-wrap').innerHTML='<div class=\'tester-photo-placeholder\'><span class=\'tester-ph-init\'>AJ</span></div>'"/>
+            </div>
+            <div class="tester-info">
+              <div class="tester-name">Anna Jack</div>
+              <p class="tester-text">Anna tried out our makeup routine for a night out with her friends. She said it was easy to follow and it was the perfect look for her night out. She said that she got tons of compliments on her makeup. Anna said that the routine was easy to follow and that it only took her 20 minutes. She also mentioned that the graphic provided made it really easy to know where to place each product. Anna even added her own little touch of eyeliner to pull it all together.</p>
+            </div>
+          </div>
+
+          <!-- ALEX LAKE — paste her photo URL into src="" below -->
+          <div class="tester-card">
+            <div class="tester-photo-wrap">
+              <img src="img/AL.png" alt="Alex Lake"
+                onerror="this.closest('.tester-photo-wrap').innerHTML='<div class=\'tester-photo-placeholder\'><span class=\'tester-ph-init\'>AL</span></div>'"/>
+            </div>
+            <div class="tester-info">
+              <div class="tester-name">Alex Lake</div>
+              <p class="tester-text">Alex tried our instructions for applying makeup before she went out to dinner with her boyfriend one night. Alex found it incredibly easy to follow. Each step was clearly explained, making the process simple and stress-free, even without much experience. By the end, Alex was really happy with the results. Her makeup looked natural and well put-together, and she felt confident she could recreate the routine on her own. Overall, she found it to be an easy, effective routine she would definitely use again.</p>
+            </div>
+          </div>
+
+          <!-- MAYA PINGLAY — paste her photo URL into src="" below -->
+          <div class="tester-card">
+            <div class="tester-photo-wrap">
+              <img src="img/MP.png" alt="Maya Pinglay"
+                onerror="this.closest('.tester-photo-wrap').innerHTML='<div class=\'tester-photo-placeholder\'><span class=\'tester-ph-init\'>MP</span></div>'"/>
+            </div>
+            <div class="tester-info">
+              <div class="tester-name">Maya Pinglay</div>
+              <p class="tester-text">Maya followed this makeup routine while getting ready for a night out with her friends on spring break, and she was surprised by how simple it was to stick to. The steps were easy to understand and flowed smoothly, so she didn't feel overwhelmed or confused at any point. She liked that the routine didn't require anything too complicated, which made getting ready feel fun instead of stressful. The final look turned out exactly how she wanted. Overall, Maya felt confident in the routine and knew she could easily do it again for another night.</p>
+            </div>
+          </div>
+
+        </div><!-- /rep-block testing results -->
+
+        <div class="rep-block">
+          <h4 class="rep-h">Troubleshooting Guide</h4>
+          <p class="rep-body">If your result does not match the instructions at any step, consult the troubleshooting tips below:</p>
+          <ul class="rep-list">
+            <li><svg style="flex-shrink:0;margin-top:4px" width="11" height="13" viewBox="0 0 12 14" xmlns="http://www.w3.org/2000/svg"><path d="M6 13C6 13 1 9.4 1 5.4C1 3 3.2 1 6 1C8.8 1 11 3 11 5.4C11 9.4 6 13 6 13Z" fill="#c4527a"/><path d="M6 1Q7.8 3.5 6 6Q4.2 3.5 6 1Z" fill="rgba(255,255,255,.35)"/></svg><span><strong>Skin tint looks patchy:</strong> The formula may have been applied to dry skin. Dampen your sponge more thoroughly and blend in smaller sections.</span></li>
+            <li><svg style="flex-shrink:0;margin-top:4px" width="11" height="13" viewBox="0 0 12 14" xmlns="http://www.w3.org/2000/svg"><path d="M6 13C6 13 1 9.4 1 5.4C1 3 3.2 1 6 1C8.8 1 11 3 11 5.4C11 9.4 6 13 6 13Z" fill="#c4527a"/><path d="M6 1Q7.8 3.5 6 6Q4.2 3.5 6 1Z" fill="rgba(255,255,255,.35)"/></svg><span><strong>Bronzer looks muddy:</strong> You may have applied too much. Buff in circular motions with a clean brush to diffuse the product.</span></li>
+            <li><svg style="flex-shrink:0;margin-top:4px" width="11" height="13" viewBox="0 0 12 14" xmlns="http://www.w3.org/2000/svg"><path d="M6 13C6 13 1 9.4 1 5.4C1 3 3.2 1 6 1C8.8 1 11 3 11 5.4C11 9.4 6 13 6 13Z" fill="#c4527a"/><path d="M6 1Q7.8 3.5 6 6Q4.2 3.5 6 1Z" fill="rgba(255,255,255,.35)"/></svg><span><strong>Eyeliner smudges:</strong> Allow the liner to set for 30 seconds before blinking; consider a waterproof formula.</span></li>
+            <li><svg style="flex-shrink:0;margin-top:4px" width="11" height="13" viewBox="0 0 12 14" xmlns="http://www.w3.org/2000/svg"><path d="M6 13C6 13 1 9.4 1 5.4C1 3 3.2 1 6 1C8.8 1 11 3 11 5.4C11 9.4 6 13 6 13Z" fill="#c4527a"/><path d="M6 1Q7.8 3.5 6 6Q4.2 3.5 6 1Z" fill="rgba(255,255,255,.35)"/></svg>[Add additional troubleshooting based on testing results]</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<footer>
+  <span class="foot-brand">G3</span>
+  <span class="foot-copy">WRT 307 Instructions Project · Syracuse University</span>
+</footer>
+
+<script>
+function go(id, el) {
+  document.querySelectorAll('.page-section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.sidebar nav a').forEach(a => a.classList.remove('active'));
+  const t = document.getElementById(id);
+  if (t) t.classList.add('active');
+  if (el) el.classList.add('active');
+  document.getElementById('main').scrollTo({ top: 0, behavior: 'smooth' });
+  return false;
+}
+
+function toggleStep(header) {
+  const row = header.closest('.step-row');
+  row.classList.toggle('open');
+}
+</script>
+
+</body>
+</html>
