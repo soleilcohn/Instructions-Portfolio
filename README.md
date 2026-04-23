@@ -1,4 +1,4 @@
-Instructions Portfolio – WRT 307 Service Learning Project 
+Instructions Portfolio – WRT 307 Service Learning  
 Last Edit: 2026-03-24 
 ============================================================
 
