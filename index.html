@@ -48,7 +48,6 @@ body {
   flex-direction:column;
 }
 
-/* ── HEADER ── */
 .site-header {
   height:var(--header-h);
   flex-shrink:0;
@@ -115,14 +114,12 @@ body {
   z-index:2;
 }
 
-/* ── LAYOUT ── */
 .body-wrap {
   flex:1;
   display:flex;
   overflow:hidden;
 }
 
-/* ── SIDEBAR ── */
 .sidebar {
   width:var(--sidebar-w);
   flex-shrink:0;
@@ -206,7 +203,6 @@ body {
   line-height:1.7;
 }
 
-/* ── MAIN ── */
 .main-content {
   flex:1;
   overflow-y:auto;
@@ -243,7 +239,6 @@ body {
   }
 }
 
-/* ── SECTION BANNER ── */
 .section-banner {
   background:linear-gradient(135deg,var(--plum) 0%,var(--accent) 55%,var(--accent-lt) 100%);
   padding:52px 60px 44px;
@@ -288,7 +283,6 @@ body {
   font-style:italic;
 }
 
-/* ── HOME HERO ── */
 .home-hero {
   display:grid;
   grid-template-columns:1.1fr .9fr;
@@ -451,7 +445,6 @@ body {
   line-height:1.6;
 }
 
-/* ── HOME IMAGE BOX ── */
 .home-img-box {
   width:100%;
   aspect-ratio:4/3;
@@ -467,7 +460,6 @@ body {
   display:block;
 }
 
-/* ── BIOS ── */
 .bio-outer {
   padding:44px 60px;
   display:flex;
@@ -557,7 +549,6 @@ body {
   color:var(--mid);
 }
 
-/* ── MATERIALS ── */
 .mat-section {
   background:var(--surface2);
   padding:48px 60px;
@@ -627,7 +618,6 @@ body {
   line-height:1.6;
 }
 
-/* ── STEPS ── */
 .steps-note {
   background:var(--plum);
   color:rgba(255,255,255,.88);
@@ -669,7 +659,6 @@ body {
   font-weight:700;
 }
 
-/* ── STICKY IMAGE ── */
 .sticky-img-box {
   width:100%;
   aspect-ratio:3/4;
@@ -685,7 +674,6 @@ body {
   display:block;
 }
 
-/* ── STEPS COLLAPSIBLE ── */
 .step-row {
   border-bottom:1px solid var(--border);
 }
@@ -796,7 +784,6 @@ body {
   margin-bottom:4px;
 }
 
-/* ── MEMO ── */
 .memo-wrap {
   max-width:820px;
   padding:52px 60px;
@@ -831,7 +818,6 @@ body {
   margin-bottom:28px;
 }
 
-/* ── TESTER CARDS ── */
 .tester-card {
   display:grid;
   grid-template-columns:320px 1fr;
@@ -849,7 +835,6 @@ body {
   box-shadow:0 6px 20px rgba(180,70,110,.08);
 }
 
-/* ── TESTER PHOTO ── */
 .tester-photo-wrap {
   display:inline-block;
   overflow:hidden;
@@ -909,7 +894,6 @@ body {
   color:var(--mid);
 }
 
-/* ── USABILITY ── */
 .report-wrap {
   max-width:920px;
   padding:52px 60px;
@@ -1006,7 +990,6 @@ body {
   color:#9a6800;
 }
 
-/* ── FOOTER ── */
 footer {
   border-top:1px solid var(--border);
   padding:4px 32px 2px;
@@ -1046,7 +1029,6 @@ footer p {
   letter-spacing:.06em;
 }
 
-/* ── RESPONSIVE ── */
 @media(max-width:960px) {
   .home-hero {
     grid-template-columns:1fr;
@@ -1129,7 +1111,6 @@ footer p {
 </head>
 <body>
 
-<!-- ── HEADER ── -->
 <header class="site-header">
   <div class="header-brand">
     <span class="brand-name">G3</span>
@@ -1139,7 +1120,6 @@ footer p {
 
 <div class="body-wrap">
 
-  <!-- ── SIDEBAR ── -->
   <aside class="sidebar">
     <div class="sidebar-inner">
       <span class="sidebar-lbl"></span>
@@ -1189,10 +1169,8 @@ footer p {
     <div class="sidebar-foot"></div>
   </aside>
 
-  <!-- ── MAIN ── -->
   <main class="main-content" id="main">
 
-    <!-- HOME -->
     <div id="home" class="page-section active">
       <div class="home-hero">
         <div class="home-left">
@@ -1218,7 +1196,6 @@ footer p {
       </div>
     </div>
 
-    <!-- TEAM BIOS -->
     <div id="team" class="page-section">
       <div class="section-banner">
         <h2>Meet the Team</h2>
@@ -1278,7 +1255,6 @@ footer p {
       </div>
     </div>
 
-    <!-- INSTRUCTIONS -->
     <div id="steps" class="page-section">
       <div class="section-banner">
         <h2>Instructions</h2>
@@ -1410,7 +1386,7 @@ footer p {
             <div class="step-body-wrap"><div class="step-spacer"></div><div class="step-body-col"><p class="step-body">Wiggle the mascara wand at the base of the upper lashes to deposit pigment, then comb upward through the lengths to lengthen and define the lashes for a finished look.</p></div></div>
           </div>
 
-        </div><!-- /steps-scroll-col -->
+        </div>
 
         <div class="steps-sticky-col">
           <span class="sticky-img-lbl">Reference Image</span>
@@ -1419,10 +1395,9 @@ footer p {
           </div>
         </div>
 
-      </div><!-- /steps-content-wrap -->
+      </div>
     </div>
 
-    <!-- DESIGN MEMO -->
     <div id="memo" class="page-section">
       <div class="section-banner">
         <h2>Design Memo</h2>
@@ -1445,7 +1420,6 @@ footer p {
       </div>
     </div>
 
-    <!-- USABILITY REPORT -->
     <div id="usability" class="page-section">
       <div class="section-banner">
         <h2>Usability Report</h2>
